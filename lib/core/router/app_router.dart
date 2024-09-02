@@ -1,4 +1,5 @@
 import 'package:go_router/go_router.dart';
+import 'package:just_audio/just_audio.dart';
 import 'package:listen_to_me/core/utils/locator.dart';
 import 'package:listen_to_me/features/audio_library/data/repositories/audio_library_repository_impl.dart';
 import 'package:listen_to_me/features/audio_library/domain/entities/song_entity.dart';
@@ -14,7 +15,8 @@ abstract class AppRouter {
   static const homeView = '/';
   static const audioPlayerView = '/audio-player';
 
-  static final playerProvider = AudioPlayerProvider();
+  static final playerProvider =
+      AudioPlayerProvider(GetLocator.locator.get<AudioPlayer>());
   static final songsProvider = SongsProvider(FetchSongsUseCase(
       audioQuery: GetLocator.locator.get<OnAudioQuery>(),
       audioLibraryRepository:

@@ -5,7 +5,10 @@ import 'package:just_audio/just_audio.dart';
 import 'package:listen_to_me/features/audio_library/domain/entities/song_entity.dart';
 
 class AudioPlayerProvider extends ChangeNotifier {
-  final AudioPlayer _audioPlayer = AudioPlayer();
+  final AudioPlayer _audioPlayer;
+
+  AudioPlayerProvider(this._audioPlayer);
+
   AudioPlayer get audioPlayer => _audioPlayer;
   late SongEntity _song;
   SongEntity get song => _song;
