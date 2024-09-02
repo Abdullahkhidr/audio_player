@@ -16,16 +16,71 @@ class SongImage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return song.artwork != null
-        ? Container(
-            width: size,
-            height: size,
-            decoration: BoxDecoration(
-                color: Colors.grey[200],
-                borderRadius: kBorderRadius10,
-                image: DecorationImage(
-                    fit: BoxFit.cover, image: MemoryImage(song.artwork!))))
-        : _DefaultImage(size: size);
+    if (song.artwork != null) {
+      return _SongImage(size: size, song: song);
+    } else {
+      return _DefaultImage(size: size);
+    }
+  }
+}
+
+class _SongImage extends StatefulWidget {
+  const _SongImage({
+    super.key,
+    required this.size,
+    required this.song,
+  });
+
+  final double size;
+  final SongEntity song;
+
+  @override
+  State<_SongImage> createState() => _SongImageState();
+}
+
+class _SongImageState extends State<_SongImage>
+    with SingleTickerProviderStateMixin {
+  late AnimationController _controller;
+
+  @override
+  void initState() {
+    super.initState();
+    _controller =
+        AnimationController(vsync: this, duration: const Duration(seconds: 10));
+    _controller.repeat();
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return RotationTransition(
+      turns: _controller,
+      child: Container(
+          width: widget.size,
+          height: widget.size,
+          decoration: BoxDecoration(
+              boxShadow: [
+                BoxShadow(
+                  color: kPrimaryColor.withOpacity(0.5),
+                  blurRadius: 5,
+                  spreadRadius: 5,
+                )
+              ],
+              color: Colors.grey[200],
+              shape: BoxShape.circle,
+              image: DecorationImage(
+                  fit: BoxFit.cover, image: MemoryImage(widget.song.artwork!))),
+          child: Container(
+              margin: kPaddingAll4,
+              decoration: BoxDecoration(
+                  border: Border.all(color: Colors.white, width: 3),
+                  shape: BoxShape.circle))),
+    );
   }
 }
 
