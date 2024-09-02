@@ -1,3 +1,5 @@
+import 'dart:typed_data';
+
 import 'package:listen_to_me/core/utils/constants.dart';
 import 'package:listen_to_me/features/audio_library/data/data_source/local_data_source.dart';
 import 'package:listen_to_me/features/audio_library/data/models/album_model.dart';
@@ -16,12 +18,14 @@ class LocalDataSourceImpl implements LocalDataSource {
 
   @override
   Future<List<SongEntity>> fetchSongs() async {
-    var songs = await audioQuery.querySongs();
-    return songs
-        .map((e) => SongModel.fromJson(e.getMap))
-        .where(
-            (e) => kAudioFileExtensions.contains(e.fileExtension.toLowerCase()))
-        .toList();
+    var songs = (await audioQuery.querySongs()).where(
+        (e) => kAudioFileExtensions.contains(e.fileExtension.toLowerCase()));
+    List<SongEntity> result = [];
+    for (var song in songs) {
+      var artwork = await _getSongArtwork(song.id, query.ArtworkType.AUDIO);
+      result.add(SongModel.fromJson(song.getMap, artwork));
+    }
+    return result;
   }
 
   @override
@@ -40,5 +44,13 @@ class LocalDataSourceImpl implements LocalDataSource {
   Future<List<PlaylistEntity>> fetchPlaylists() async {
     var playlists = await audioQuery.queryPlaylists();
     return playlists.map((e) => PlaylistModel.fromJson(e.getMap)).toList();
+  }
+
+  Future<Uint8List?> _getSongArtwork(int id, query.ArtworkType type) async {
+    try {
+      return await audioQuery.queryArtwork(id, query.ArtworkType.AUDIO);
+    } catch (e) {
+      return null;
+    }
   }
 }

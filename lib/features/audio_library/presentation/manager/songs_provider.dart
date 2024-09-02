@@ -8,12 +8,24 @@ class SongsProvider extends ChangeNotifier {
   SongsProvider(this.fetchSongsUseCase);
 
   List<SongEntity> _songs = [];
-
+  SongState _state = SongState.loading;
   Future<void> fetchSongs() async {
     final songs = await fetchSongsUseCase.execute();
-    songs.fold((l) => null, (r) => _songs = r);
+    songs.fold((l) {
+      _state = SongState.error;
+    }, (r) {
+      _songs = r;
+      _state = SongState.loaded;
+    });
     notifyListeners();
   }
 
   List<SongEntity> get songs => _songs;
+  SongState get state => _state;
+}
+
+enum SongState {
+  loading,
+  loaded,
+  error,
 }

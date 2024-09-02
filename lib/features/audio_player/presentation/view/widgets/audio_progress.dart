@@ -55,7 +55,7 @@ class _AudioProgressState extends State<AudioProgress> {
 
 class _DurationView extends StatelessWidget {
   final Duration duration;
-  const _DurationView({super.key, required this.duration});
+  const _DurationView({required this.duration});
 
   @override
   Widget build(BuildContext context) {

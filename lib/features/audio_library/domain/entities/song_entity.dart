@@ -1,3 +1,5 @@
+import 'dart:typed_data';
+
 class SongEntity {
   final String title;
   final String artist;
@@ -10,6 +12,7 @@ class SongEntity {
   final DateTime dateAdded;
   final DateTime dateModified;
   final String fileExtension;
+  final Uint8List? artwork;
 
   SongEntity({
     required this.title,
@@ -23,5 +26,6 @@ class SongEntity {
     required this.dateAdded,
     required this.dateModified,
     required this.fileExtension,
+    required this.artwork,
   });
 }
