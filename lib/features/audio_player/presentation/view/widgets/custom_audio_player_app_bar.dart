@@ -8,14 +8,16 @@ class CustomMusicPlayerAppBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: kPaddingAll20,
-      child: Row(
-        children: [
-          IconButton(
-              onPressed: () => GoRouter.of(context).pop(),
-              icon: const Icon(FontAwesomeIcons.arrowLeft)),
-        ],
+    return SafeArea(
+      child: Padding(
+        padding: kPaddingAll20,
+        child: Row(
+          children: [
+            IconButton(
+                onPressed: () => GoRouter.of(context).pop(),
+                icon: const Icon(FontAwesomeIcons.arrowLeft)),
+          ],
+        ),
       ),
     );
   }

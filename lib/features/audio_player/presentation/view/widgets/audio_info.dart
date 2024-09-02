@@ -12,13 +12,17 @@ class AudioInfo extends StatelessWidget {
   Widget build(BuildContext context) {
     final song = context.watch<AudioPlayerProvider>().song;
     final size = MediaQuery.sizeOf(context);
-    return Column(children: [
-      SongImage(song: song, size: size.width * 0.8),
-      SizedBox(height: kPaddingAll8.vertical),
-      Text(song.title, textAlign: TextAlign.center, style: TextStyles.style24),
-      SizedBox(height: kPaddingAll4.vertical),
-      Text(song.artist,
-          style: TextStyles.style16.copyWith(color: kSecondaryColor)),
-    ]);
+    return Padding(
+      padding: kPaddingAll20,
+      child: Column(children: [
+        SongImage(song: song, size: size.width * 0.8),
+        SizedBox(height: kPaddingAll8.vertical),
+        Text(song.title,
+            textAlign: TextAlign.center, style: TextStyles.style20),
+        SizedBox(height: kPaddingAll4.vertical),
+        Text(song.artist,
+            style: TextStyles.style16.copyWith(color: kSecondaryColor)),
+      ]),
+    );
   }
 }

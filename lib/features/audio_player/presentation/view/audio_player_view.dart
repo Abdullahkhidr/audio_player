@@ -7,6 +7,6 @@ class AudioPlayerView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(body: SafeArea(child: AudioPlayerBody()));
+    return const Scaffold(body: AudioPlayerBody());
   }
 }
