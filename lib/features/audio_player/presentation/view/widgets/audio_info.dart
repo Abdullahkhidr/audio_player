@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:listen_to_me/core/utils/constants.dart';
 import 'package:listen_to_me/core/utils/text_styles.dart';
-import 'package:listen_to_me/core/widgets/song_image.dart';
+import 'package:listen_to_me/features/audio_player/presentation/view/widgets/song_image.dart';
 import 'package:listen_to_me/features/audio_player/presentation/manager/audio_player_provider.dart';
 import 'package:provider/provider.dart';
 

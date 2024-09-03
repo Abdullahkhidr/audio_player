@@ -5,8 +5,8 @@ import 'package:listen_to_me/core/router/app_router.dart';
 import 'package:listen_to_me/core/utils/constants.dart';
 import 'package:listen_to_me/core/widgets/play_button.dart';
 import 'package:listen_to_me/features/audio_library/domain/entities/song_entity.dart';
+import 'package:listen_to_me/features/audio_library/presentation/view/widgets/song_item_image.dart';
 
-import '../../../../../core/widgets/song_image.dart';
 import 'song_info.dart';
 
 class SongItem extends StatelessWidget {
@@ -29,7 +29,7 @@ class SongItem extends StatelessWidget {
         ),
         child: Row(
           children: [
-            SongImage(song: song, size: 70),
+            SongItemImage(song: song),
             SizedBox(width: kPaddingAll16.left),
             Expanded(child: SongInfo(song: song)),
             SizedBox(width: kPaddingAll8.right),
