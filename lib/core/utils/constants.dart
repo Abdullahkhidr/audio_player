@@ -5,6 +5,7 @@ EdgeInsets kPaddingAll8 = const EdgeInsets.all(8);
 EdgeInsets kPaddingAll16 = const EdgeInsets.all(16);
 EdgeInsets kPaddingAll18 = const EdgeInsets.all(18);
 EdgeInsets kPaddingAll20 = const EdgeInsets.all(20);
+EdgeInsets kPaddingAll24 = const EdgeInsets.all(24);
 
 BorderRadius kBorderRadius10 = BorderRadius.circular(10);
 BorderRadius kBorderRadius20 = BorderRadius.circular(20);

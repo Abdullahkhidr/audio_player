@@ -7,39 +7,68 @@ import 'package:listen_to_me/features/audio_library/domain/entities/song_entity.
 class AudioPlayerProvider extends ChangeNotifier {
   final AudioPlayer _audioPlayer;
 
+  late SongEntity _song;
+
   AudioPlayerProvider(this._audioPlayer);
 
   AudioPlayer get audioPlayer => _audioPlayer;
-  late SongEntity _song;
   SongEntity get song => _song;
+  bool get isLooping => _audioPlayer.loopMode == LoopMode.one;
+  bool get isPlaying => _audioPlayer.playing;
+  double get volume => _audioPlayer.volume;
+  double get speed => _audioPlayer.speed;
+  List<double> get speeds => [1, 1.25, 1.5, 2];
 
   void init(SongEntity song) {
     try {
       if (_song != song) {
-        _init(song);
+        _initialize(song);
       }
     } catch (e) {
-      _init(song);
+      _initialize(song);
     }
   }
 
-  void _init(SongEntity song) {
+  void _initialize(SongEntity song) {
     _audioPlayer.setFilePath(song.path);
     _song = song;
     _audioPlayer.play();
   }
 
-  bool get isPlaying => _audioPlayer.playing;
-
-  void seekForward() {
-    _audioPlayer.seek(Duration(
-        seconds: min(_audioPlayer.position.inSeconds + 10,
-            _audioPlayer.duration?.inSeconds ?? 0)));
+  void setVolume(double volume) {
+    _audioPlayer.setVolume(volume);
   }
 
-  void seekBackward() {
-    _audioPlayer
-        .seek(Duration(seconds: max(0, _audioPlayer.position.inSeconds - 10)));
+  void setSpeed(double speed) {
+    _audioPlayer.setSpeed(speed);
+  }
+
+  void toggleLoopMode() {
+    _audioPlayer.setLoopMode(
+        _audioPlayer.loopMode == LoopMode.one ? LoopMode.off : LoopMode.one);
+    notifyListeners();
+  }
+
+  void toggleVolume() {
+    _audioPlayer.setVolume(1 - _audioPlayer.volume);
+    notifyListeners();
+  }
+
+  void toggleSpeed() {
+    _audioPlayer.setSpeed(speeds[(speeds.indexOf(speed) + 1) % speeds.length]);
+    notifyListeners();
+  }
+
+  void play() {
+    _audioPlayer.play();
+  }
+
+  void pause() {
+    _audioPlayer.pause();
+  }
+
+  void stop() {
+    _audioPlayer.stop();
   }
 
   void togglePlay() {
@@ -55,16 +84,15 @@ class AudioPlayerProvider extends ChangeNotifier {
     _audioPlayer.seek(duration);
   }
 
-  void play() {
-    _audioPlayer.play();
+  void seekForward() {
+    _audioPlayer.seek(Duration(
+        seconds: min(_audioPlayer.position.inSeconds + 10,
+            _audioPlayer.duration?.inSeconds ?? 0)));
   }
 
-  void pause() {
-    _audioPlayer.pause();
-  }
-
-  void stop() {
-    _audioPlayer.stop();
+  void seekBackward() {
+    _audioPlayer
+        .seek(Duration(seconds: max(0, _audioPlayer.position.inSeconds - 10)));
   }
 
   @override
