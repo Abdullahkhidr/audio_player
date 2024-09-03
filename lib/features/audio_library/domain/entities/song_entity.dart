@@ -1,6 +1,7 @@
 import 'dart:typed_data';
+import 'package:equatable/equatable.dart';
 
-class SongEntity {
+class SongEntity extends Equatable {
   final String title;
   final String artist;
   final String album;
@@ -14,7 +15,7 @@ class SongEntity {
   final String fileExtension;
   final Uint8List? artwork;
 
-  SongEntity({
+  const SongEntity({
     required this.title,
     required this.artist,
     required this.album,
@@ -28,4 +29,8 @@ class SongEntity {
     required this.fileExtension,
     required this.artwork,
   });
+
+  @override
+  List<Object?> get props =>
+      [title, artist, album, path, duration, id, albumId, artistId];
 }

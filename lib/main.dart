@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:listen_to_me/core/router/app_router.dart';
 import 'package:listen_to_me/core/utils/constants.dart';
 import 'package:listen_to_me/core/utils/locator.dart';
@@ -17,6 +18,7 @@ class MusicPlayerApp extends StatelessWidget {
     return MaterialApp.router(
       debugShowCheckedModeBanner: false,
       theme: ThemeData.light().copyWith(
+        textTheme: GoogleFonts.cairoTextTheme(),
         colorScheme: ColorScheme.light(
           primary: kPrimaryColor,
           secondary: kSecondaryColor,

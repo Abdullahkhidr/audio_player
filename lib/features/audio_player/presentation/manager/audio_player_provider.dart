@@ -14,6 +14,16 @@ class AudioPlayerProvider extends ChangeNotifier {
   SongEntity get song => _song;
 
   void init(SongEntity song) {
+    try {
+      if (_song != song) {
+        _init(song);
+      }
+    } catch (e) {
+      _init(song);
+    }
+  }
+
+  void _init(SongEntity song) {
     _audioPlayer.setFilePath(song.path);
     _song = song;
     _audioPlayer.play();

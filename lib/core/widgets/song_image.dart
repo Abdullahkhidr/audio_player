@@ -6,10 +6,12 @@ import 'package:listen_to_me/features/audio_library/domain/entities/song_entity.
 
 class SongImage extends StatelessWidget {
   final double size;
+  final bool isPlaying;
   const SongImage({
     super.key,
     required this.song,
     required this.size,
+    this.isPlaying = false,
   });
 
   final SongEntity song;
@@ -17,7 +19,7 @@ class SongImage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     if (song.artwork != null) {
-      return _SongImage(size: size, song: song);
+      return _SongImage(size: size, song: song, isPlaying: isPlaying);
     } else {
       return _DefaultImage(size: size);
     }
@@ -29,10 +31,12 @@ class _SongImage extends StatefulWidget {
     super.key,
     required this.size,
     required this.song,
+    required this.isPlaying,
   });
 
   final double size;
   final SongEntity song;
+  final bool isPlaying;
 
   @override
   State<_SongImage> createState() => _SongImageState();
@@ -47,7 +51,9 @@ class _SongImageState extends State<_SongImage>
     super.initState();
     _controller =
         AnimationController(vsync: this, duration: const Duration(seconds: 10));
-    _controller.repeat();
+    if (widget.isPlaying) {
+      _controller.repeat();
+    }
   }
 
   @override
