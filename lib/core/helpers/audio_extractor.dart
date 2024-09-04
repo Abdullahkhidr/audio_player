@@ -1,11 +1,13 @@
 import 'package:listen_to_me/core/helpers/native_code_invoker.dart';
+import 'package:listen_to_me/core/utils/constants.dart';
 
 class AudioExtractor {
   Future<List<Map<String, dynamic>>> getSongs() async {
     try {
-      final audioPaths =
-          await NativeCodeInvoker.invokeMethod('getAudioFiles') as List;
-      return audioPaths.map((e) => Map<String, dynamic>.from(e)).toList();
+      final audioData = await NativeCodeInvoker.invokeMethod(
+              'getAudioFiles', {'extensions': kAudioFileExtensions.join(',')})
+          as List;
+      return audioData.map((e) => Map<String, dynamic>.from(e)).toList();
     } catch (e) {
       throw Exception(e);
     }

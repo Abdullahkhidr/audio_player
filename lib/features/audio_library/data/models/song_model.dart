@@ -48,7 +48,7 @@ class SongModel extends SongEntity {
       dateAdded: DateTime.fromMillisecondsSinceEpoch(map['dateAdded']),
       dateModified: DateTime.fromMillisecondsSinceEpoch(map['dateModified']),
       fileExtension: map['fileExtension'],
-      artwork: map['artwork'] != null ? base64Decode(map['artwork']) : null,
+      artwork: map['artwork'] == null ? null : base64Decode(map['artwork']),
     );
   }
 }

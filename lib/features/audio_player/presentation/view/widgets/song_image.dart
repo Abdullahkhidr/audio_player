@@ -28,7 +28,6 @@ class SongImage extends StatelessWidget {
 
 class _SongImage extends StatefulWidget {
   const _SongImage({
-    super.key,
     required this.size,
     required this.song,
     required this.isPlaying,
