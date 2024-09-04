@@ -23,17 +23,19 @@ class AudioControls extends StatelessWidget {
                     onPressed: () {},
                     icon: const Icon(FontAwesomeIcons.backwardStep)),
                 IconButton(
-                    onPressed: () {
-                      audioPlayerProvider.seekBackward();
+                    onPressed: () async {
+                      await audioPlayerProvider.seekBackward();
                     },
                     icon: const Icon(FontAwesomeIcons.backward)),
                 PlayButton(
-                    onPressed: () => audioPlayerProvider.togglePlay(),
+                    onPressed: () async {
+                      await audioPlayerProvider.togglePlay();
+                    },
                     isPlaying: audioPlayerProvider.isPlaying,
                     iconSize: 80),
                 IconButton(
-                    onPressed: () {
-                      audioPlayerProvider.seekForward();
+                    onPressed: () async {
+                      await audioPlayerProvider.seekForward();
                     },
                     icon: const Icon(FontAwesomeIcons.forward)),
                 IconButton(
@@ -48,22 +50,22 @@ class AudioControls extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   IconButton(
-                      onPressed: () {
-                        audioPlayerProvider.toggleLoopMode();
+                      onPressed: () async {
+                        await audioPlayerProvider.toggleLoopMode();
                       },
                       icon: Icon(audioPlayerProvider.isLooping
                           ? FontAwesomeIcons.repeat
                           : FontAwesomeIcons.shuffle)),
                   GestureDetector(
-                    onTap: () {
-                      audioPlayerProvider.toggleSpeed();
+                    onTap: () async {
+                      await audioPlayerProvider.toggleSpeed();
                     },
                     child: Text('x${audioPlayerProvider.speed}',
                         style: TextStyles.style18),
                   ),
                   IconButton(
-                      onPressed: () {
-                        audioPlayerProvider.toggleVolume();
+                      onPressed: () async {
+                        await audioPlayerProvider.toggleVolume();
                       },
                       icon: Icon(audioPlayerProvider.volume == 0
                           ? FontAwesomeIcons.volumeXmark

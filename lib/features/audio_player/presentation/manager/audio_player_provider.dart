@@ -35,63 +35,64 @@ class AudioPlayerProvider extends ChangeNotifier {
     _audioPlayer.play();
   }
 
-  void setVolume(double volume) {
-    _audioPlayer.setVolume(volume);
+  Future<void> setVolume(double volume) async {
+    await _audioPlayer.setVolume(volume);
   }
 
-  void setSpeed(double speed) {
-    _audioPlayer.setSpeed(speed);
+  Future<void> setSpeed(double speed) async {
+    await _audioPlayer.setSpeed(speed);
   }
 
-  void toggleLoopMode() {
-    _audioPlayer.setLoopMode(
+  Future<void> toggleLoopMode() async {
+    await _audioPlayer.setLoopMode(
         _audioPlayer.loopMode == LoopMode.one ? LoopMode.off : LoopMode.one);
     notifyListeners();
   }
 
-  void toggleVolume() {
-    _audioPlayer.setVolume(1 - _audioPlayer.volume);
+  Future<void> toggleVolume() async {
+    await _audioPlayer.setVolume(1 - _audioPlayer.volume);
     notifyListeners();
   }
 
-  void toggleSpeed() {
-    _audioPlayer.setSpeed(speeds[(speeds.indexOf(speed) + 1) % speeds.length]);
+  Future<void> toggleSpeed() async {
+    await _audioPlayer
+        .setSpeed(speeds[(speeds.indexOf(speed) + 1) % speeds.length]);
     notifyListeners();
   }
 
-  void play() {
-    _audioPlayer.play();
+  Future<void> play() async {
+    await _audioPlayer.play();
   }
 
-  void pause() {
-    _audioPlayer.pause();
+  Future<void> pause() async {
+    await _audioPlayer.pause();
   }
 
-  void stop() {
-    _audioPlayer.stop();
+  Future<void> stop() async {
+    await _audioPlayer.stop();
   }
 
-  void togglePlay() {
+  Future<void> togglePlay() async {
     if (isPlaying) {
-      pause();
+      await pause();
     } else {
-      play();
+      await play();
     }
     notifyListeners();
   }
 
-  void seek(Duration duration) {
-    _audioPlayer.seek(duration);
+  Future<void> seek(Duration duration) async {
+    await _audioPlayer.seek(duration);
   }
 
-  void seekForward() {
-    _audioPlayer.seek(Duration(
+  Future<void> seekForward() async {
+    await _audioPlayer.seek(Duration(
         seconds: min(_audioPlayer.position.inSeconds + 10,
             _audioPlayer.duration?.inSeconds ?? 0)));
   }
 
-  void seekBackward() {
-    _audioPlayer
+  Future<void> seekBackward() async {
+    await _audioPlayer
         .seek(Duration(seconds: max(0, _audioPlayer.position.inSeconds - 10)));
   }
 
