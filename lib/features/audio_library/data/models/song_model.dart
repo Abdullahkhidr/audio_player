@@ -1,9 +1,10 @@
+import 'dart:convert';
 import 'dart:typed_data';
 
 import 'package:listen_to_me/features/audio_library/domain/entities/song_entity.dart';
 
 class SongModel extends SongEntity {
-  SongModel({
+  const SongModel({
     required super.title,
     required super.artist,
     required super.album,
@@ -33,4 +34,21 @@ class SongModel extends SongEntity {
               DateTime.fromMillisecondsSinceEpoch(json['date_modified']),
           fileExtension: json['file_extension'],
           artwork: artwork);
+
+  factory SongModel.fromMap(Map<String, dynamic> map) {
+    return SongModel(
+      id: map['id'],
+      title: map['title'],
+      artist: map['artist'],
+      album: map['album'],
+      path: map['path'],
+      duration: Duration(milliseconds: map['duration']),
+      albumId: map['albumId'],
+      artistId: map['artistId'],
+      dateAdded: DateTime.fromMillisecondsSinceEpoch(map['dateAdded']),
+      dateModified: DateTime.fromMillisecondsSinceEpoch(map['dateModified']),
+      fileExtension: map['fileExtension'],
+      artwork: map['artwork'] != null ? base64Decode(map['artwork']) : null,
+    );
+  }
 }

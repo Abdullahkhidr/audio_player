@@ -43,7 +43,7 @@ class AudioLibraryRepositoryImpl implements AudioLibraryRepository {
     try {
       return right(await localDataSource.fetchSongs());
     } catch (e) {
-      return left(Failure());
+      return left(Failure(message: e.toString()));
     }
   }
 }
