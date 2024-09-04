@@ -29,7 +29,7 @@ class AudioControls extends StatelessWidget {
                     icon: const Icon(FontAwesomeIcons.backward)),
                 PlayButton(
                     onPressed: () async {
-                      await audioPlayerProvider.togglePlay();
+                      audioPlayerProvider.togglePlay();
                     },
                     isPlaying: audioPlayerProvider.isPlaying,
                     iconSize: 80),

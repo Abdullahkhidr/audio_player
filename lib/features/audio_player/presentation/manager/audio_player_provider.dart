@@ -60,23 +60,24 @@ class AudioPlayerProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  Future<void> play() async {
-    await _audioPlayer.play();
+  void play() async {
+    _audioPlayer.play();
   }
 
-  Future<void> pause() async {
-    await _audioPlayer.pause();
+  void pause() {
+    _audioPlayer.pause();
   }
 
   Future<void> stop() async {
     await _audioPlayer.stop();
+    notifyListeners();
   }
 
-  Future<void> togglePlay() async {
+  void togglePlay() {
     if (isPlaying) {
-      await pause();
+      pause();
     } else {
-      await play();
+      play();
     }
     notifyListeners();
   }
