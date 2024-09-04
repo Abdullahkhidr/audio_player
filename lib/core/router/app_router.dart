@@ -20,13 +20,14 @@ abstract class AppRouter {
   static final songsProvider = SongsProvider(FetchSongsUseCase(
       audioExtractor: GetLocator.locator.get<AudioExtractor>(),
       audioLibraryRepository:
-          GetLocator.locator.get<AudioLibraryRepositoryImpl>()));
+          GetLocator.locator.get<AudioLibraryRepositoryImpl>()))
+    ..fetchSongs();
 
   static GoRouter get router => GoRouter(routes: [
         GoRoute(
             path: homeView,
             builder: (context, state) => ChangeNotifierProvider.value(
-                value: songsProvider..fetchSongs(), child: const HomeView())),
+                value: songsProvider, child: const HomeView())),
         GoRoute(
             path: audioPlayerView,
             builder: (context, state) => ChangeNotifierProvider.value(
