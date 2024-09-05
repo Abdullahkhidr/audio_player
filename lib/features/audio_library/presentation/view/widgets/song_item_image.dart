@@ -11,8 +11,8 @@ class SongItemImage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: 70,
-      height: 70,
+      width: 80,
+      height: 80,
       decoration: BoxDecoration(
         borderRadius: kBorderRadius10,
         image: song.artwork == null

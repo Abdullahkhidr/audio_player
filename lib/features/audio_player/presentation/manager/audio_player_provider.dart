@@ -7,24 +7,21 @@ import 'package:listen_to_me/features/audio_library/domain/entities/song_entity.
 class AudioPlayerProvider extends ChangeNotifier {
   final AudioPlayer _audioPlayer;
 
-  late SongEntity _song;
+  SongEntity? _song;
 
   AudioPlayerProvider(this._audioPlayer);
 
   AudioPlayer get audioPlayer => _audioPlayer;
-  SongEntity get song => _song;
+  SongEntity? get song => _song;
   bool get isLooping => _audioPlayer.loopMode == LoopMode.one;
-  bool get isPlaying => _audioPlayer.playing;
+  Stream<bool> get isPlaying => _audioPlayer.playingStream;
+  Stream<Duration> get duration => _audioPlayer.positionStream;
   double get volume => _audioPlayer.volume;
   double get speed => _audioPlayer.speed;
   List<double> get speeds => [1, 1.25, 1.5, 2];
 
   void init(SongEntity song) {
-    try {
-      if (_song != song) {
-        _initialize(song);
-      }
-    } catch (e) {
+    if (_song != song) {
       _initialize(song);
     }
   }
@@ -74,7 +71,7 @@ class AudioPlayerProvider extends ChangeNotifier {
   }
 
   void togglePlay() {
-    if (isPlaying) {
+    if (_audioPlayer.playing) {
       pause();
     } else {
       play();

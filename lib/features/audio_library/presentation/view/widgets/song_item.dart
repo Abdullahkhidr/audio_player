@@ -3,7 +3,6 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:go_router/go_router.dart';
 import 'package:listen_to_me/core/router/app_router.dart';
 import 'package:listen_to_me/core/utils/constants.dart';
-import 'package:listen_to_me/core/widgets/play_button.dart';
 import 'package:listen_to_me/features/audio_library/domain/entities/song_entity.dart';
 import 'package:listen_to_me/features/audio_library/presentation/view/widgets/song_item_image.dart';
 
@@ -32,8 +31,8 @@ class SongItem extends StatelessWidget {
             SongItemImage(song: song),
             SizedBox(width: kPaddingAll16.left),
             Expanded(child: SongInfo(song: song)),
-            SizedBox(width: kPaddingAll8.right),
-            PlayButton(onPressed: () {}),
+            // SizedBox(width: kPaddingAll8.right),
+            // PlayButton(onPressed: () {}),
             SizedBox(width: kPaddingAll16.right),
             const Icon(FontAwesomeIcons.ellipsisVertical, size: 18)
           ],

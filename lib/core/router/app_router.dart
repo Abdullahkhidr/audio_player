@@ -27,7 +27,8 @@ abstract class AppRouter {
         GoRoute(
             path: homeView,
             builder: (context, state) => ChangeNotifierProvider.value(
-                value: songsProvider, child: const HomeView())),
+                value: songsProvider,
+                child: HomeView(audioPlayerProvider: playerProvider))),
         GoRoute(
             path: audioPlayerView,
             builder: (context, state) => ChangeNotifierProvider.value(

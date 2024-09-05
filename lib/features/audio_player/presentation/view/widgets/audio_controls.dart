@@ -27,12 +27,16 @@ class AudioControls extends StatelessWidget {
                       await audioPlayerProvider.seekBackward();
                     },
                     icon: const Icon(FontAwesomeIcons.backward)),
-                PlayButton(
-                    onPressed: () async {
-                      audioPlayerProvider.togglePlay();
-                    },
-                    isPlaying: audioPlayerProvider.isPlaying,
-                    iconSize: 80),
+                StreamBuilder<bool>(
+                    stream: audioPlayerProvider.isPlaying,
+                    builder: (context, snapshot) {
+                      return PlayButton(
+                          onPressed: () async {
+                            audioPlayerProvider.togglePlay();
+                          },
+                          isPlaying: snapshot.data ?? false,
+                          iconSize: 80);
+                    }),
                 IconButton(
                     onPressed: () async {
                       await audioPlayerProvider.seekForward();

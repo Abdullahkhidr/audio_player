@@ -15,7 +15,7 @@ class AudioInfo extends StatelessWidget {
     return Padding(
       padding: kPaddingAll20,
       child: Column(children: [
-        SongImage(song: song, size: size.width * 0.8, isPlaying: true),
+        SongImage(song: song!, size: size.width * 0.8, isPlaying: true),
         SizedBox(height: kPaddingAll8.vertical),
         Text(song.title,
             textAlign: TextAlign.center, style: TextStyles.style20),
