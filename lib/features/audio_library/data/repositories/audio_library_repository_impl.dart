@@ -58,9 +58,9 @@ class AudioLibraryRepositoryImpl implements AudioLibraryRepository {
           .map((e) => FolderEntity(
               name: e.split('/').last,
               path: e,
-              numberOfSongs: CacheData.songs
+              songs: CacheData.songs
                   .where((element) => element.path.startsWith(e))
-                  .length));
+                  .toList()));
       return right(songs.toList());
     } catch (e) {
       return left(Failure());

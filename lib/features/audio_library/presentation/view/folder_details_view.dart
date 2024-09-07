@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:listen_to_me/core/utils/cache_data.dart';
 import 'package:listen_to_me/core/utils/constants.dart';
 import 'package:listen_to_me/core/utils/text_styles.dart';
 import 'package:listen_to_me/features/audio_library/domain/entities/folder_entity.dart';
@@ -32,12 +31,14 @@ class FolderDetailsView extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    Text('${folderEntity.numberOfSongs} Songs',
+                    Text('${folderEntity.songs.length} Songs',
                         style: TextStyles.style14),
                     Text('\t|\t',
                         style: TextStyles.style14
                             .copyWith(fontWeight: FontWeight.w600)),
-                    const Text('04:48:12 Duration', style: TextStyles.style14),
+                    Text(
+                        '${folderEntity.totalDuration.toString().substring(0, folderEntity.totalDuration.toString().indexOf('.'))} Total Duration',
+                        style: TextStyles.style14),
                   ],
                 ),
                 const FolderActions(),
@@ -52,11 +53,10 @@ class FolderDetailsView extends StatelessWidget {
                     child: const Text('Songs', style: TextStyles.style20)),
               ],
             )),
-            SliverList.list(
-              children: CacheData.songs
-                  .where((e) => e.path.startsWith(folderEntity.path))
-                  .map((e) => SongItem(song: e))
-                  .toList(),
+            SliverList.builder(
+              itemCount: folderEntity.songs.length,
+              itemBuilder: (context, index) =>
+                  SongItem(song: folderEntity.songs[index]),
             )
           ],
         ),

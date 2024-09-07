@@ -14,7 +14,8 @@ class FolderItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return ListTile(
       onTap: () {
-        GoRouter.of(context).push(AppRouter.folderDetailsView, extra: folderEntity);
+        GoRouter.of(context)
+            .push(AppRouter.folderDetailsView, extra: folderEntity);
       },
       leading: Icon(FontAwesomeIcons.solidFolderClosed,
           color: kPrimaryColor, size: 40),
@@ -22,7 +23,7 @@ class FolderItem extends StatelessWidget {
           maxLines: 1,
           style: TextStyles.style14.copyWith(fontWeight: FontWeight.w600)),
       subtitle: Text(
-          '${folderEntity.numberOfSongs} songs | ${folderEntity.path}',
+          '${folderEntity.songs.length} songs | ${folderEntity.path}',
           maxLines: 1,
           overflow: TextOverflow.ellipsis,
           style: TextStyles.style12.copyWith(color: kSecondaryColor)),
