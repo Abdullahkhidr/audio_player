@@ -3,11 +3,13 @@ import 'package:just_audio/just_audio.dart';
 import 'package:listen_to_me/core/helpers/audio_extractor.dart';
 import 'package:listen_to_me/core/utils/locator.dart';
 import 'package:listen_to_me/features/audio_library/data/repositories/audio_library_repository_impl.dart';
+import 'package:listen_to_me/features/audio_library/domain/entities/folder_entity.dart';
 import 'package:listen_to_me/features/audio_library/domain/entities/song_entity.dart';
 import 'package:listen_to_me/features/audio_library/domain/use_cases/fetch_folders_use_case.dart';
 import 'package:listen_to_me/features/audio_library/domain/use_cases/fetch_songs_use_case.dart';
 import 'package:listen_to_me/features/audio_library/presentation/manager/folders_provider.dart';
 import 'package:listen_to_me/features/audio_library/presentation/manager/songs_provider.dart';
+import 'package:listen_to_me/features/audio_library/presentation/view/folder_details_view.dart';
 import 'package:listen_to_me/features/audio_player/presentation/manager/audio_player_provider.dart';
 import 'package:listen_to_me/features/audio_player/presentation/view/audio_player_view.dart';
 import 'package:listen_to_me/features/home/presentation/home_view.dart';
@@ -16,6 +18,7 @@ import 'package:provider/provider.dart';
 abstract class AppRouter {
   static const homeView = '/';
   static const audioPlayerView = '/audio-player';
+  static const folderDetailsView = '/folder-details';
 
   static final playerProvider =
       AudioPlayerProvider(GetLocator.locator.get<AudioPlayer>());
@@ -45,5 +48,9 @@ abstract class AppRouter {
             builder: (context, state) => ChangeNotifierProvider.value(
                 value: playerProvider..init((state.extra as SongEntity)),
                 child: const AudioPlayerView())),
+        GoRoute(
+            path: folderDetailsView,
+            builder: (context, state) =>
+                FolderDetailsView(folderEntity: state.extra as FolderEntity)),
       ]);
 }

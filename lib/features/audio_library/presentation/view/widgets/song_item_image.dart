@@ -10,7 +10,7 @@ class SongItemImage extends StatelessWidget {
   final double size;
   final BorderRadius? borderRadius;
   const SongItemImage(
-      {super.key, required this.song, this.size = 70, this.borderRadius});
+      {super.key, required this.song, this.size = 60, this.borderRadius});
 
   @override
   Widget build(BuildContext context) {
