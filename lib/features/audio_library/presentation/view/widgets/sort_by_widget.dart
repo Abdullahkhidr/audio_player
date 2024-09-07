@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:go_router/go_router.dart';
+import 'package:listen_to_me/core/methods/capitalize.dart';
 import 'package:listen_to_me/core/utils/constants.dart';
 import 'package:listen_to_me/core/utils/text_styles.dart';
 import 'package:listen_to_me/features/audio_library/presentation/manager/songs_provider.dart';
@@ -31,8 +32,8 @@ class SortByWidget extends StatelessWidget {
                 });
           },
           child: Text(
-              songsProvider.sortOption.name.replaceAll('_', ' ').toUpperCase(),
-              style: TextStyles.style16),
+              songsProvider.sortOption.name.replaceAll('_', ' ').capitalize,
+              style: TextStyles.style16.copyWith(color: kPrimaryColor)),
         ),
         SizedBox(width: kPaddingAll8.horizontal),
         InkWell(
@@ -43,6 +44,8 @@ class SortByWidget extends StatelessWidget {
             songsProvider.isAscending
                 ? FontAwesomeIcons.arrowDownAZ
                 : FontAwesomeIcons.arrowUpAZ,
+            color: kPrimaryColor,
+            size: 20,
           ),
         ),
       ],

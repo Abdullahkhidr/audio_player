@@ -18,6 +18,7 @@ class MusicPlayerApp extends StatelessWidget {
     return MaterialApp.router(
       debugShowCheckedModeBanner: false,
       theme: ThemeData.light().copyWith(
+        scaffoldBackgroundColor: kBackgroundColor,
         textTheme: GoogleFonts.cairoTextTheme(),
         colorScheme: ColorScheme.light(
           primary: kPrimaryColor,

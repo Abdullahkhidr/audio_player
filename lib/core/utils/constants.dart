@@ -15,6 +15,7 @@ BorderRadius kBorderRadius50 = BorderRadius.circular(50);
 
 Color kPrimaryColor = const Color(0xffff861f);
 Color kOnPrimaryColor = const Color(0xffffffff);
+Color kBackgroundColor = Colors.white;
 Color kTextColor = const Color(0xff000000);
 Color kSecondaryColor = Colors.black54;
 Color kTertiaryColor = Colors.grey[300]!;

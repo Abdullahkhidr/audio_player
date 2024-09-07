@@ -22,7 +22,7 @@ class SongInfo extends StatelessWidget {
             style: TextStyles.style14),
         SizedBox(height: kPaddingAll4.top),
         Text('${song.artist} | ${song.duration.inMinutes} mins',
-            style: TextStyles.style10),
+            style: TextStyles.style12),
       ],
     );
   }
