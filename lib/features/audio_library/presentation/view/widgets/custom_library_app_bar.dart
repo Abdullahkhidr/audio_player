@@ -10,7 +10,7 @@ class CustomLibraryAppBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: kPaddingAll20,
+      padding: kPaddingAll20.copyWith(bottom: 0),
       child: Column(
         children: [
           Row(
@@ -21,7 +21,7 @@ class CustomLibraryAppBar extends StatelessWidget {
             ],
           ),
           SizedBox(height: kPaddingAll8.top),
-          Divider(color: kTertiaryColor),
+          // Divider(color: kTertiaryColor),
         ],
       ),
     );
