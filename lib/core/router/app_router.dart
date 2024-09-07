@@ -4,7 +4,9 @@ import 'package:listen_to_me/core/helpers/audio_extractor.dart';
 import 'package:listen_to_me/core/utils/locator.dart';
 import 'package:listen_to_me/features/audio_library/data/repositories/audio_library_repository_impl.dart';
 import 'package:listen_to_me/features/audio_library/domain/entities/song_entity.dart';
+import 'package:listen_to_me/features/audio_library/domain/use_cases/fetch_folders_use_case.dart';
 import 'package:listen_to_me/features/audio_library/domain/use_cases/fetch_songs_use_case.dart';
+import 'package:listen_to_me/features/audio_library/presentation/manager/folders_provider.dart';
 import 'package:listen_to_me/features/audio_library/presentation/manager/songs_provider.dart';
 import 'package:listen_to_me/features/audio_player/presentation/manager/audio_player_provider.dart';
 import 'package:listen_to_me/features/audio_player/presentation/view/audio_player_view.dart';
@@ -17,18 +19,27 @@ abstract class AppRouter {
 
   static final playerProvider =
       AudioPlayerProvider(GetLocator.locator.get<AudioPlayer>());
+
+  static final foldersProvider = FoldersProvider(
+      fetchFoldersUseCase: FetchFoldersUseCase(
+          audioLibraryRepository:
+              GetLocator.locator.get<AudioLibraryRepositoryImpl>()));
+
   static final songsProvider = SongsProvider(FetchSongsUseCase(
       audioExtractor: GetLocator.locator.get<AudioExtractor>(),
       audioLibraryRepository:
           GetLocator.locator.get<AudioLibraryRepositoryImpl>()))
-    ..fetchSongs();
+    ..fetchSongs().then((value) {
+      foldersProvider.fetchFolders();
+    });
 
   static GoRouter get router => GoRouter(routes: [
         GoRoute(
             path: homeView,
-            builder: (context, state) => ChangeNotifierProvider.value(
-                value: songsProvider,
-                child: HomeView(audioPlayerProvider: playerProvider))),
+            builder: (context, state) => MultiProvider(providers: [
+                  ChangeNotifierProvider.value(value: songsProvider),
+                  ChangeNotifierProvider.value(value: foldersProvider),
+                ], child: HomeView(audioPlayerProvider: playerProvider))),
         GoRoute(
             path: audioPlayerView,
             builder: (context, state) => ChangeNotifierProvider.value(

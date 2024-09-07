@@ -3,9 +3,9 @@ import 'package:listen_to_me/core/utils/constants.dart';
 import 'package:listen_to_me/core/utils/text_styles.dart';
 import 'package:listen_to_me/features/audio_library/presentation/view/widgets/sort_by_widget.dart';
 
-class CustomLibraryAppBar extends StatelessWidget {
+class CustomSongsAppBar extends StatelessWidget {
   final String title;
-  const CustomLibraryAppBar({super.key, required this.title});
+  const CustomSongsAppBar({super.key, required this.title});
 
   @override
   Widget build(BuildContext context) {

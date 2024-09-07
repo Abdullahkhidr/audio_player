@@ -16,7 +16,7 @@ class SongsView extends StatelessWidget {
     return CustomScrollView(
       slivers: [
         SliverToBoxAdapter(
-            child: CustomLibraryAppBar(title: '${songs.length} Songs')),
+            child: CustomSongsAppBar(title: '${songs.length} Songs')),
         SliverList.builder(
             itemBuilder: (context, index) => state == SongState.loading
                 ? const SongItemSkeleton()

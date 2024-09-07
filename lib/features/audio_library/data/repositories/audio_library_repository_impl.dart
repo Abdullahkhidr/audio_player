@@ -1,8 +1,10 @@
 import 'package:dartz/dartz.dart';
 import 'package:listen_to_me/core/errors/failure.dart';
+import 'package:listen_to_me/core/utils/cache_data.dart';
 import 'package:listen_to_me/features/audio_library/data/data_source/local_data_source.dart';
 import 'package:listen_to_me/features/audio_library/domain/entities/album_entity.dart';
 import 'package:listen_to_me/features/audio_library/domain/entities/artist_entity.dart';
+import 'package:listen_to_me/features/audio_library/domain/entities/folder_entity.dart';
 import 'package:listen_to_me/features/audio_library/domain/entities/playlist_entity.dart';
 import 'package:listen_to_me/features/audio_library/domain/entities/song_entity.dart';
 import 'package:listen_to_me/features/audio_library/domain/repositories/audio_library_repository.dart';
@@ -44,6 +46,24 @@ class AudioLibraryRepositoryImpl implements AudioLibraryRepository {
       return right(await localDataSource.fetchSongs());
     } catch (e) {
       return left(Failure(message: e.toString()));
+    }
+  }
+
+  @override
+  Future<Either<Failure, List<FolderEntity>>> fetchFolders() async {
+    try {
+      var songs = CacheData.songs
+          .map((e) => e.path.substring(0, e.path.lastIndexOf('/')))
+          .toSet()
+          .map((e) => FolderEntity(
+              name: e.split('/').last,
+              path: e,
+              numberOfSongs: CacheData.songs
+                  .where((element) => element.path.startsWith(e))
+                  .length));
+      return right(songs.toList());
+    } catch (e) {
+      return left(Failure());
     }
   }
 }
