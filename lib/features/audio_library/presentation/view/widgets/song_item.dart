@@ -28,7 +28,7 @@ class SongItem extends StatelessWidget {
         ),
         child: Row(
           children: [
-            SongItemImage(song: song),
+            SongItemImage(image: song.artwork),
             SizedBox(width: kPaddingAll16.left),
             Expanded(child: SongInfo(song: song)),
             // SizedBox(width: kPaddingAll8.right),

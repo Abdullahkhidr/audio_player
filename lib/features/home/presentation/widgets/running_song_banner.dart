@@ -38,7 +38,7 @@ class RunningSongBanner extends StatelessWidget {
         child: Row(
           children: [
             SongItemImage(
-                song: audioPlayerProvider.song,
+                image: audioPlayerProvider.song?.artwork,
                 size: 60,
                 borderRadius: kBorderRadius50),
             Expanded(

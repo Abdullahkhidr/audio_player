@@ -23,16 +23,6 @@ class AudioExtractor {
     }
   }
 
-  Future<List<Map<String, dynamic>>> getArtists() async {
-    try {
-      final artists =
-          await NativeCodeInvoker.invokeMethod('queryArtists') as List;
-      return artists.map((e) => Map<String, dynamic>.from(e)).toList();
-    } catch (e) {
-      throw Exception(e);
-    }
-  }
-
   Future<List<Map<String, dynamic>>> getPlaylists() async {
     try {
       final playlists =
