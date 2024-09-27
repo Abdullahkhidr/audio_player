@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:listen_to_me/features/audio_library/presentation/view/albums_view.dart';
 import 'package:listen_to_me/features/audio_library/presentation/view/artists_view.dart';
 import 'package:listen_to_me/features/audio_library/presentation/view/folders_view.dart';
 import 'package:listen_to_me/features/audio_library/presentation/view/songs_view.dart';
@@ -12,8 +13,7 @@ class HomeViewBody extends StatelessWidget {
     return const TabBarWidget(views: [
       SongsView(),
       ArtistsView(),
-      SongsView(),
-      SongsView(),
+      AlbumsView(),
       FoldersView(),
     ]);
   }

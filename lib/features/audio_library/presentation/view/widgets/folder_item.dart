@@ -12,10 +12,17 @@ class FolderItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final size = MediaQuery.of(context).size;
     return ListTile(
       onTap: () {
-        GoRouter.of(context)
-            .push(AppRouter.folderDetailsView, extra: folderEntity);
+        GoRouter.of(context).push(AppRouter.groupOfSongsView, extra: {
+          'cover': Icon(FontAwesomeIcons.solidFolderClosed,
+              size: size.height * 0.16, color: kPrimaryColor),
+          'title': folderEntity.name,
+          'totalDuration': folderEntity.songs.fold(const Duration(seconds: 0),
+              (value, element) => value + element.duration),
+          'songs': folderEntity.songs,
+        });
       },
       leading: Icon(FontAwesomeIcons.solidFolderClosed,
           color: kPrimaryColor, size: 40),

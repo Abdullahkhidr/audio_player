@@ -16,7 +16,6 @@ class _TabBarWidgetState extends State<TabBarWidget>
     const TabItem(title: 'Songs'),
     const TabItem(title: 'Artists'),
     const TabItem(title: 'Albums'),
-    const TabItem(title: 'Playlists'),
     const TabItem(title: 'Folders'),
   ];
   late TabController _tabController;

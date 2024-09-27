@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
+import 'package:listen_to_me/core/router/app_router.dart';
 import 'package:listen_to_me/core/utils/constants.dart';
 import 'package:listen_to_me/core/utils/text_styles.dart';
 import 'package:listen_to_me/features/audio_library/domain/entities/artist_entity.dart';
@@ -11,7 +13,16 @@ class ArtistItemWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () {},
+      onTap: () {
+        GoRouter.of(context).push(AppRouter.groupOfSongsView, extra: {
+          'cover': SongItemImage(
+              size: 180, image: artist.artwork, borderRadius: kBorderRadius10),
+          'title': artist.name,
+          'totalDuration': artist.songs.fold(const Duration(seconds: 0),
+              (value, element) => value + element.duration),
+          'songs': artist.songs,
+        });
+      },
       child: Container(
         margin: kPaddingAll4,
         padding: EdgeInsets.symmetric(
@@ -34,7 +45,7 @@ class ArtistItemWidget extends StatelessWidget {
                     style: TextStyles.style14
                         .copyWith(fontWeight: FontWeight.w600)),
                 SizedBox(height: kPaddingAll4.top),
-                Text("${artist.songsCount} songs",
+                Text("${artist.songs.length} songs",
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
                     style: TextStyles.style14)

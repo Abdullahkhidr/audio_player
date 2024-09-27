@@ -5,7 +5,7 @@ import 'package:listen_to_me/features/audio_library/presentation/view/widgets/cu
 import 'package:provider/provider.dart';
 
 class ArtistsView extends StatelessWidget {
-  const ArtistsView({Key? key}) : super(key: key);
+  const ArtistsView({super.key});
 
   @override
   Widget build(BuildContext context) {

@@ -10,7 +10,7 @@ class FetchAlbumsUseCase {
   FetchAlbumsUseCase(
       {required this.audioExtractor, required this.audioLibraryRepository});
 
-  Future<Either<Failure, List<AlbumEntity>>> execute() async {
+  Future<Either<Failure, List<AlbumEntity>>> call() async {
     // if (await audioQuery.permissionsRequest()) {
     return await audioLibraryRepository.fetchAlbums();
     // }

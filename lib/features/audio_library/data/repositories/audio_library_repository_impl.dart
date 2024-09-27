@@ -16,7 +16,21 @@ class AudioLibraryRepositoryImpl implements AudioLibraryRepository {
   @override
   Future<Either<Failure, List<AlbumEntity>>> fetchAlbums() async {
     try {
-      return right(await localDataSource.fetchAlbums());
+      var albums = CacheData.songs
+          .map((e) => AlbumEntity(
+              title: e.album,
+              artist: e.artist,
+              id: e.albumId,
+              artwork: e.artwork))
+          .toList();
+      for (var i = 0; i < albums.length; i++) {
+        albums[i].songs = CacheData.songs
+            .where((element) =>
+                element.album == albums[i].title &&
+                element.artist == albums[i].artist)
+            .toList();
+      }
+      return right(albums.toSet().toList());
     } catch (e) {
       return left(Failure());
     }
@@ -30,9 +44,9 @@ class AudioLibraryRepositoryImpl implements AudioLibraryRepository {
               name: e.artist, id: e.artistId.toString(), artwork: e.artwork))
           .toList();
       for (var i = 0; i < artists.length; i++) {
-        artists[i].songsCount = CacheData.songs
+        artists[i].songs = CacheData.songs
             .where((element) => element.artist == artists[i].name)
-            .length;
+            .toList();
       }
       return right(artists.toSet().toList());
     } catch (e) {

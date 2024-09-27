@@ -1,21 +1,22 @@
-class AlbumEntity {
+import 'dart:typed_data';
+
+import 'package:equatable/equatable.dart';
+import 'package:listen_to_me/features/audio_library/domain/entities/song_entity.dart';
+
+class AlbumEntity extends Equatable {
+  final Uint8List? artwork;
   final String title;
   final String artist;
-  final String album;
-  final String path;
-  final String duration;
-  final String id;
-  final String albumId;
-  final String artistId;
-
+  final int id;
+  List<SongEntity> songs;
   AlbumEntity({
     required this.title,
     required this.artist,
-    required this.album,
-    required this.path,
-    required this.duration,
     required this.id,
-    required this.albumId,
-    required this.artistId,
+    this.artwork,
+    this.songs = const [],
   });
+
+  @override
+  List<Object?> get props => [id, artist];
 }
